@@ -26,5 +26,6 @@
 	</head>
 	<body>
 		<canvas id="triangle-canvas" style="border:none;" width="500" height="500"></canvas>
+		<a href="../index.html">返回实验首页</a>
 	</body>
 </html>
