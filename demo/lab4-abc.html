@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-type" content="text/html;charset=utf-8">
+	<title>lab4-c</title>
+	<style>
+		.left{
+			float: left;
+			width: 50%;
+		}
+		.right{
+			float: left;
+			width: 50%;
+		}
+		.clear{
+			clear: both;
+		}
+	</style>
+    <script id="rtvshader" type="x-shader/x-vertex">
+	attribute vec4 vPosition;
+	attribute vec4 vColor;
+    varying vec4 fColor;
+    
+    uniform vec3 scale;
+    uniform vec3 theta;
+    uniform vec3 pos;
+
+	void main()
+	{
+		vec3 angles = radians( theta );
+		vec3 cost = cos( theta );
+		vec3 sint = sin( theta );
+        
+        mat4 s = mat4(  scale.x,  0.0,  0.0, 0.0,
+                        0.0,  scale.y,  0.0, 0.0,
+                        0.0,  0.0,  scale.z, 0.0,
+                        pos.x, pos.y,  pos.z, 1.0
+        				);
+
+		mat4 rx = mat4(  1.0,  0.0,  0.0, 0.0,
+						 0.0,  cost.x,  sint.x, 0.0,
+						 0.0,  -sint.x,  cost.x, 0.0,
+						 0.0,  0.0,  0.0, 1.0
+						 );
+
+		mat4 ry = mat4(  cost.y,  0.0, -sint.y,  0.0,
+						 0.0,  1.0,  0.0,  0.0,
+						 sint.y,  0.0,  cost.y,  0.0,
+						 0.0,  0.0,  0.0,  1.0
+						 );
+
+		mat4 rz = mat4(  cost.z,  sint.z,  0.0,  0.0,
+						 -sint.z,  cost.z,  0.0,  0.0,
+						 0.0,  0.0,  1.0,  0.0,
+						 0.0,  0.0,  0.0,  1.0
+						 );
+
+		fColor = vColor;
+		gl_Position = s * rz * ry * rx * vPosition;
+		gl_Position.z = -gl_Position.z;
+    }
+	</script>
+
+    <script id="rtfshader" type="x-shader/x-fragment">
+	precision mediump float;
+	varying vec4 fColor;
+
+	void main()
+	{
+		gl_FragColor = fColor;
+	}
+	</script>
+    <script type="text/javascript" src="../js/common/webgl-utils.js"></script>
+    <script type="text/javascript" src="../js/common/initShaders.js"></script>
+    <script type="text/javascript" src="../js/common/gl-matrix-min.js"></script>
+    
+    <script type="text/javascript" src="../js/ch04/rotcube-abc.js"></script>
+</head>
+
+<body>
+	<h1>旋转的立方体——任意轴旋转、平移和缩放</h1>
+	<canvas id="rtcb-canvas" width="600" height="600">你的浏览器不支持HTML5 canvas元素</canvas>
+	<fieldset>
+		<legend>交互按键</legend>
+		<button id="xbutton">Rotate X</button>
+		<button id="ybutton">Rotate Y</button>
+		<button id="zbutton">Rotate Z</button><br>
+		<div class="left">
+			<p>x轴平移:<input type="text" id="xpos" value="0"></p>
+			<p>y轴平移:<input type="text" id="ypos" value="0"></p>
+			<p>z轴平移:<input type="text" id="zpos" value="0"></p>
+			<input type="submit" onclick="changePos()"><br>
+		</div>
+		<div class="right">
+			<p>x轴缩放:<input type="text" id="xscale" value="1"></p>
+			<p>y轴缩放:<input type="text" id="yscale" value="1"></p>
+			<p>z轴缩放:<input type="text" id="zscale" value="1"></p>
+			<input type="submit" onclick="changeScale()"><br>
+		</div>
+		<div class="clear"></div>
+		<p><button onclick="window.location.href='../index.html'">返回实验首页</button></p>
+	</fieldset>	
+	
+</body>
+
+</html>
