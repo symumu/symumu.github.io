@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+	<title>sy计算机图形学</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+<!--鼠标移入侧边栏，二级菜单3D展开,鼠标hover背景变色,鼠标移入二维码背景变色-->
+<div class="wrap">
+	<div class="mu">计算机图形学实验</div>
+</div>
+
+<div class="nav-main">
+	<div class="nav-box">
+		<!--主要（一级）标签-->
+		<div class="nav">
+		  <ul class="nav-ul">
+			<li><a href="index.html" class="home"><span>首页</span></a></li>
+			<li><a href="#" class="one"><span>实验一</span></a></li>
+			<li><a href="#" class="two"><span>实验二</span></a></li>
+			<li><a href="#" class="three"><span>实验三</span></a></li>
+			<li><a href="#" class="four"><span>实验四</span></a></li>
+			<li><a href="#" class="five"><span>实验五</span></a></li>
+			<li><a href="#" class="six"><span>实验六</span></a></li>
+			<li><a href="#" class="seven"><span>实验七</span></a></li>
+			<li><a href="#" class="course"><span>课程设计</span></a></li>
+		  </ul>
+		</div>
+		<!--次要（二级）标签-->
+		<div class="nav-slide">
+			<div class="nav-slide-o">
+				<ul>
+					<li><a href="demo/lab0.html"><span>Lab0</span></a></li>
+					<li><a href="introduction.html"><span>Introduction</span></a></li>
+				</ul>
+			</div>
+			<div class="nav-slide-o">
+				<ul>
+					<li><a href="demo/lab1-a.html"><span>Lab1-a</span></a></li>
+					<li><a href="demo/lab1-b.html"><span>Lab1-b</span></a></li>
+					<li><a href="demo/lab1-c.html"><span>Lab1-c</span></a></li>
+					<li><a href="demo/lab1-d.html"><span>Lab1-d</span></a></li>
+					<li><a href="demo/lab1-e.html"><span>Lab1-e</span></a></li>
+				</ul>
+			</div>
+			<div class="nav-slide-o">
+				<ul>
+					<li><a href="demo/lab2-a.html"><span>Lab2-a</span></a></li>
+					<li><a href="demo/lab2-b.html"><span>Lab2-b</span></a></li>
+					<li><a href="demo/lab2-cde.html"><span>Lab2-cde</span></a></li>					
+				</ul>
+			</div>
+			<div class="nav-slide-o">
+				<ul>
+					<li><a href="demo/lab3-a.html"><span>Lab3-a</span></a></li>
+					<li><a href="demo/lab3-b.html"><span>Lab3-b</span></a></li>
+				</ul>
+			</div>
+			<div class="nav-slide-o">
+				<ul>
+					<li><a href="demo/lab4-abc.html"><span>Lab4-abc</span></a></li>
+					<li><a href="demo/lab4-d.html"><span>Lab4-d</span></a></li>
+					<li><a href="demo/lab4-e.html"><span>Lab4-e</span></a></li>	
+				</ul>
+			</div>
+			<div class="nav-slide-o">
+				<ul>
+					<li><a href="demo/lab5.html"><span>Lab5</span></a></li>
+				</ul>
+			</div>
+			<div class="nav-slide-o">
+				<ul>
+					<li><a href="demo/lab6-a.html"><span>Lab6-a</span></a></li>
+					<li><a href="demo/lab6-b.html"><span>Lab6-b</span></a></li>
+					<li><a href="demo/lab6-c.html"><span>Lab6-c</span></a></li>	
+				</ul>
+			</div>
+			<div class="nav-slide-o">
+				<ul>
+					<li><a href="demo/lab7-a.html"><span>Lab7-a</span></a></li>
+					<li><a href="demo/lab7-b.html"><span>Lab7-b</span></a></li>
+				</ul>
+			</div>
+			<div class="nav-slide-o">
+				<ul>
+					<li><a href="demo/CourseDesign.html"><span>CourseDesign</span></a></li>
+					<li><a href="demo/手指模型文档.pdf"><span>DetailedDesign</span></a></li>
+					<li><a href="demo/手指模型展示汇报.pdf"><span>Report</span></a></li>	
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+	var thisTime;
+	$('.nav-ul li').mouseleave(function(even){
+			thisTime	=	setTimeout(thisMouseOut,1000);
+	})
+
+	$('.nav-ul li').mouseenter(function(){
+		clearTimeout(thisTime);
+		var thisUB	=	$('.nav-ul li').index($(this));
+		if($.trim($('.nav-slide-o').eq(thisUB).html()) != "")
+		{
+			$('.nav-slide').addClass('hover');
+			$('.nav-slide-o').hide();
+			$('.nav-slide-o').eq(thisUB).show();
+		}
+		else{
+			$('.nav-slide').removeClass('hover');
+		}
+		
+	})
+	
+	function thisMouseOut(){
+		$('.nav-slide').removeClass('hover');
+	}
+	 
+	$('.nav-slide').mouseenter(function(){
+		clearTimeout(thisTime);
+		$('.nav-slide').addClass('hover');
+	})
+	$('.nav-slide').mouseleave(function(){
+		$('.nav-slide').removeClass('hover');
+	})
+
+})
+</script>
+</body>
+</html>
